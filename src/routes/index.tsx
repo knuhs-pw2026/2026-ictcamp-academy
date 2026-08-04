@@ -89,14 +89,14 @@ function DashboardPage() {
     shelterQuery.error
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-slate-950 text-slate-950">
+    <div className="relative min-h-screen overflow-x-hidden bg-slate-50 text-slate-900">
       <DashboardBackground />
 
       <div
         className={`sticky top-0 z-40 border-b backdrop-blur-xl ${
           hasHeatWarning
-            ? "border-red-400/20 bg-red-600/90 text-white"
-            : "border-white/10 bg-slate-950/75 text-white"
+            ? "border-red-400/30 bg-linear-to-r from-red-600 to-rose-600 text-white"
+            : "border-slate-200 bg-white/80 text-slate-700"
         }`}
       >
         <div className="mx-auto flex min-h-12 max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-6">
@@ -104,7 +104,7 @@ function DashboardPage() {
             {hasHeatWarning ? (
               <TriangleAlert className="h-4 w-4" />
             ) : (
-              <ShieldAlert className="h-4 w-4 text-emerald-300" />
+              <ShieldAlert className="h-4 w-4 text-emerald-500" />
             )}
 
             <span>
@@ -117,7 +117,11 @@ function DashboardPage() {
           <Button
             variant="ghost"
             size="sm"
-            className="shrink-0 text-white hover:bg-white/10 hover:text-white"
+            className={
+              hasHeatWarning
+                ? "shrink-0 text-white hover:bg-white/10 hover:text-white"
+                : "shrink-0 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+            }
             disabled={isFetching || shelterQuery.isFetching}
             onClick={() => {
               void Promise.all([refetchAll(), shelterQuery.refetch()])
@@ -134,24 +138,24 @@ function DashboardPage() {
       </div>
 
       <main className="relative z-10 mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-12">
-        <header className="mb-8 flex flex-col gap-5 text-white md:flex-row md:items-end md:justify-between">
+        <header className="mb-8 flex flex-col gap-5 text-slate-900 md:flex-row md:items-end md:justify-between">
           <div>
-            <Badge className="mb-4 border-white/20 bg-white/10 text-white backdrop-blur hover:bg-white/10">
+            <Badge className="mb-4 border-transparent bg-linear-to-r from-orange-500 to-rose-500 text-white hover:from-orange-500 hover:to-rose-500">
               <LocateFixed className="mr-1.5 h-3.5 w-3.5" />
               실시간 기상 관측
             </Badge>
 
-            <h1 className="text-3xl font-black tracking-tight sm:text-5xl">
+            <h1 className="bg-linear-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-3xl font-black tracking-tight text-transparent sm:text-5xl">
               폭염 안전 대시보드
             </h1>
 
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base">
               현재 날씨와 기상특보를 확인하고 폭염으로부터 안전하게 대비하세요.
             </p>
           </div>
 
-          <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-xl">
-            <MapPin className="h-5 w-5 text-orange-300" />
+          <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+            <MapPin className="h-5 w-5 text-orange-500" />
 
             <div>
               <div className="text-xs text-slate-400">현재 조회 지역</div>
@@ -163,7 +167,7 @@ function DashboardPage() {
         {error && (
           <Alert
             variant="destructive"
-            className="mb-6 border-red-300/40 bg-red-950/80 text-red-50"
+            className="mb-6 border-red-200 bg-red-50 text-red-900"
           >
             <AlertCircle className="h-4 w-4" />
             <AlertTitle>기상 데이터를 불러오지 못했습니다.</AlertTitle>
@@ -227,7 +231,7 @@ function DashboardPage() {
         </section>
 
         <section className="mt-6 grid gap-6 xl:grid-cols-[0.85fr_1.15fr]">
-          <Card className="border-white/40 bg-white/95 shadow-2xl shadow-black/20 backdrop-blur-xl">
+          <Card className="border-slate-200/70 bg-white/95 shadow-2xl shadow-black/20 backdrop-blur-xl">
             <CardHeader>
               <div className="flex items-center justify-between gap-3">
                 <div>
@@ -292,7 +296,7 @@ function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-white/40 bg-white/95 shadow-2xl shadow-black/20 backdrop-blur-xl">
+          <Card className="border-slate-200/70 bg-white/95 shadow-2xl shadow-black/20 backdrop-blur-xl">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
@@ -412,7 +416,7 @@ function DashboardPage() {
         </section>
 
         <section className="mt-6 grid gap-6 lg:grid-cols-2">
-          <Card className="border-white/40 bg-white/95 shadow-xl backdrop-blur-xl">
+          <Card className="border-slate-200/70 bg-white/95 shadow-xl backdrop-blur-xl">
             <CardHeader>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
@@ -437,7 +441,7 @@ function DashboardPage() {
               </div>
             </CardHeader>
 
-            <CardContent>
+            <CardContent className="max-h-[360px] overflow-y-scroll">
               {shelterQuery.isLoading ? (
                 <div className="space-y-3">
                   {Array.from({ length: 3 }).map((_, index) => (
@@ -495,7 +499,7 @@ function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-white/40 bg-white/95 shadow-xl backdrop-blur-xl">
+          <Card className="border-slate-200/70 bg-white/95 shadow-xl backdrop-blur-xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Sun className="h-5 w-5 text-orange-500" />
@@ -590,11 +594,11 @@ function DashboardPage() {
 function DashboardBackground() {
   return (
     <div className="pointer-events-none fixed inset-0">
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,#020617_0%,#0f172a_45%,#172554_100%)]" />
-      <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-orange-500/20 blur-3xl" />
-      <div className="absolute top-20 -right-32 h-120 w-120 rounded-full bg-blue-500/20 blur-3xl" />
-      <div className="absolute -bottom-40 left-1/3 h-128 w-lg rounded-full bg-cyan-500/10 blur-3xl" />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.7)_1px,transparent_1px)] bg-size-[36px_36px] opacity-[0.035]" />
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,#fff7ed_0%,#f8fafc_45%,#eff6ff_100%)]" />
+      <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-orange-300/30 blur-3xl" />
+      <div className="absolute top-20 -right-32 h-120 w-120 rounded-full bg-blue-300/30 blur-3xl" />
+      <div className="absolute -bottom-40 left-1/3 h-128 w-lg rounded-full bg-cyan-300/20 blur-3xl" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.5)_1px,transparent_1px)] bg-size-[36px_36px] opacity-[0.025]" />
     </div>
   )
 }
@@ -695,7 +699,7 @@ function StatCard({
   loading: boolean
 }>) {
   return (
-    <Card className="group overflow-hidden border-white/40 bg-white/95 shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+    <Card className="group overflow-hidden border-slate-200/70 bg-white/95 shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
       <div className={`h-1.5 bg-linear-to-r ${accent}`} />
 
       <CardContent className="p-5">
