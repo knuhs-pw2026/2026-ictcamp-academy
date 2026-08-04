@@ -441,7 +441,7 @@ function DashboardPage() {
               </div>
             </CardHeader>
 
-            <CardContent className="max-h-[360px] overflow-y-scroll">
+            <CardContent className="max-h-90 overflow-y-scroll">
               {shelterQuery.isLoading ? (
                 <div className="space-y-3">
                   {Array.from({ length: 3 }).map((_, index) => (
@@ -578,15 +578,17 @@ function DashboardPage() {
         </span>
       </motion.button>
 
-      {isChatOpen && (
-        <div className="fixed right-5 bottom-28 z-50 w-[calc(100vw-2.5rem)] max-w-sm sm:right-8 sm:bottom-32">
-          <iframe
-            src="https://copilotstudio.microsoft.com/environments/Default-a5a060c4-00b2-4343-b6c9-23625439a0c0/bots/cr9fa_v2_X0hS-b/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
-            className="h-172 w-full border-0"
-            title="Copilot Studio AI 폭염 상담"
-          ></iframe>
-        </div>
-      )}
+      <div
+        className={`fixed right-5 bottom-28 z-50 w-[calc(100vw-2.5rem)] max-w-sm overflow-hidden rounded-xl shadow-2xl shadow-black/20 sm:right-8 sm:bottom-32 ${
+          isChatOpen ? "" : "pointer-events-none invisible opacity-0"
+        }`}
+      >
+        <iframe
+          src="https://copilotstudio.microsoft.com/environments/Default-a5a060c4-00b2-4343-b6c9-23625439a0c0/bots/cr9fa_v2_X0hS-b/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
+          className="h-172 w-full rounded-xl border-0"
+          title="Copilot Studio AI 폭염 상담"
+        ></iframe>
+      </div>
     </div>
   )
 }
