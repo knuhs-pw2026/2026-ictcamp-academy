@@ -122,7 +122,20 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+
+    background:
+      radial-gradient(
+        circle at top right,
+        rgba(249, 115, 22, 0.12),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at top left,
+        rgba(59, 130, 246, 0.08),
+        transparent 30%
+      ),
+      #f8fafc;
   }
 
   button:not(:disabled),
