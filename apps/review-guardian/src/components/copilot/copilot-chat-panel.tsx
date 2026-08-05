@@ -60,7 +60,7 @@ export function CopilotChatPanel({
       }
       transition={{ duration: 0.25, ease: "easeOut" }}
     >
-      <header className="flex shrink-0 items-center justify-between gap-3 border-b border-border px-4 py-3">
+      {/* <header className="flex shrink-0 items-center justify-between gap-3 border-b border-border px-4 py-3">
         <div className="flex min-w-0 items-center gap-2.5">
           <ShieldCheck
             className="size-5 shrink-0 text-primary"
@@ -90,7 +90,7 @@ export function CopilotChatPanel({
         >
           <X className="size-4" aria-hidden="true" />
         </Button>
-      </header>
+      </header> */}
 
       <div className="relative min-h-0 flex-1">
         {!isIframeLoaded && (
@@ -104,6 +104,17 @@ export function CopilotChatPanel({
             </output>
           </div>
         )}
+
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-sm"
+          onClick={onClose}
+          aria-label="채팅창 닫기"
+          className="absolute top-2 right-4 text-white"
+        >
+          <X className="size-5" aria-hidden="true" />
+        </Button>
 
         <iframe
           ref={iframeRef}
@@ -128,24 +139,12 @@ export function CopilotChatPanel({
       <Separator />
 
       <footer className="flex shrink-0 flex-col gap-1.5 px-4 py-3 text-xs text-muted-foreground">
-        <p className="wrap-break-word">
+        <li className="list-inside list-disc wrap-break-word">
           분석 결과는 확인 가능한 상품 및 후기 데이터에 따라 달라질 수 있습니다.
-        </p>
-        <p className="wrap-break-word">
+        </li>
+        <li className="list-inside list-disc wrap-break-word">
           개인정보, 계정정보 또는 결제정보는 입력하지 마세요.
-        </p>
-        <a
-          href={COPILOT_STUDIO_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex w-fit items-center gap-1 pt-0.5 text-primary underline-offset-4 hover:underline"
-        >
-          새 창에서 열기
-          <ExternalLink className="size-3" aria-hidden="true" />
-          <span className="sr-only">
-            (Review Guardian 채팅을 새 탭에서 엽니다)
-          </span>
-        </a>
+        </li>
       </footer>
     </motion.div>
   )
