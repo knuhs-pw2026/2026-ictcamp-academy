@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react"
 import { createFileRoute } from "@tanstack/react-router"
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import {
   AlertCircle,
   Building2,
