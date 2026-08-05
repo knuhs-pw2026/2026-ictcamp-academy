@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button"
 import { useCopilotChat } from "@/components/copilot/copilot-chat-widget"
 
 const NAV_LINKS = [
-  { href: "#features", label: "서비스 소개" },
-  { href: "#how-it-works", label: "이용 방법" },
-  { href: "#trust", label: "검증 원칙" },
+  { hash: "features", label: "서비스 소개" },
+  { hash: "how-it-works", label: "이용 방법" },
+  { hash: "trust", label: "검증 원칙" },
 ]
 
 export function AppHeader() {
@@ -17,7 +17,7 @@ export function AppHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-border/70 bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link to="#top" className="flex min-w-0 items-center gap-2">
+        <Link to="/" hash="top" className="flex min-w-0 items-center gap-2">
           <ShieldCheck
             className="size-6 shrink-0 text-primary"
             aria-hidden="true"
@@ -38,8 +38,9 @@ export function AppHeader() {
         >
           {NAV_LINKS.map((link) => (
             <Link
-              key={link.href}
-              to={link.href}
+              key={link.hash}
+              to="/"
+              hash={link.hash}
               className="transition-colors hover:text-foreground"
             >
               {link.label}
