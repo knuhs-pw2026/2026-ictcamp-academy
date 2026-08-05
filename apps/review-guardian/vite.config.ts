@@ -8,7 +8,7 @@ import { tanstackRouter } from "@tanstack/router-plugin/vite"
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/weather/",
+  base: "/review-guardian/",
 
   plugins: [
     tanstackRouter({
@@ -24,7 +24,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: path.resolve(__dirname, "./dist/weather"),
+    outDir: path.resolve(__dirname, "./dist/review-guardian"),
     emptyOutDir: true,
   },
 })

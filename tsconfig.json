@@ -1,4 +1,7 @@
 {
   "files": [],
-  "references": [{ "path": "./apps/weather" }]
+  "references": [
+    { "path": "./apps/weather" },
+    { "path": "./apps/review-guardian" }
+  ]
 }
