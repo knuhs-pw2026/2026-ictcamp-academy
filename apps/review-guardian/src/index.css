@@ -151,6 +151,6 @@
   }
 
   html {
-    @apply font-sans;
+    @apply scroll-py-16 scroll-smooth font-sans;
   }
 }

@@ -147,7 +147,7 @@ export function CopilotChatProvider({
         onClose={closeChat}
         onIframeLoad={handleIframeLoad}
         iframeRef={iframeRef}
-        // headingRef={headingRef}
+        headingRef={headingRef}
       />
 
       <ChatFloatingButton

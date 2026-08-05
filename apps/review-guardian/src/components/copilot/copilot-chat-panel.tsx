@@ -1,10 +1,17 @@
 import type { RefObject } from "react"
-import { motion, useReducedMotion } from "motion/react"
-import { Loader2, X } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
+import { motion, useReducedMotion } from "motion/react"
+import { ExternalLink, Loader2, ShieldCheck, X } from "lucide-react"
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { Separator } from "@/components/ui/separator"
-import { COPILOT_STUDIO_URL } from "@/lib/copilot"
+import { Button, buttonVariants } from "@/components/ui/button"
+
+import { COPILOT_CHAT_URL, COPILOT_STUDIO_URL } from "@/lib/copilot"
 import { cn } from "@/lib/utils"
 
 interface CopilotChatPanelProps {
@@ -16,7 +23,7 @@ interface CopilotChatPanelProps {
   onClose: () => void
   onIframeLoad: () => void
   iframeRef: RefObject<HTMLIFrameElement | null>
-  // headingRef: RefObject<HTMLHeadingElement | null>
+  headingRef: RefObject<HTMLHeadingElement | null>
 }
 
 export function CopilotChatPanel({
@@ -28,7 +35,7 @@ export function CopilotChatPanel({
   onClose,
   onIframeLoad,
   iframeRef,
-  // headingRef,
+  headingRef,
 }: Readonly<CopilotChatPanelProps>) {
   const prefersReducedMotion = useReducedMotion()
 
@@ -41,8 +48,8 @@ export function CopilotChatPanel({
       aria-hidden={!isOpen}
       inert={!isOpen}
       className={cn(
-        "fixed inset-0 z-50 flex flex-col overflow-hidden bg-card text-card-foreground sm:inset-auto sm:right-4 sm:bottom-24 sm:w-[min(420px,calc(100vw-2rem))] sm:rounded-2xl sm:border sm:border-border sm:shadow-2xl sm:ring-1 sm:ring-foreground/5 md:right-6",
-        "sm:h-[min(680px,calc(100dvh-8rem))] sm:max-h-[calc(100dvh-6rem)]",
+        "fixed inset-0 z-50 flex flex-col overflow-hidden bg-card text-card-foreground sm:inset-auto sm:right-4 sm:bottom-24 sm:w-[min(450px,calc(100vw-2rem))] sm:rounded-2xl sm:border sm:border-border sm:shadow-2xl sm:ring-1 sm:ring-foreground/5 md:right-6",
+        "sm:h-[min(768px,calc(100dvh-8rem))] sm:max-h-[calc(100dvh-6rem)]",
         !isOpen && "pointer-events-none"
       )}
       style={{
@@ -105,16 +112,66 @@ export function CopilotChatPanel({
           </div>
         )}
 
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon-sm"
-          onClick={onClose}
-          aria-label="채팅창 닫기"
-          className="absolute top-2 right-4 text-white"
-        >
-          <X className="size-5" aria-hidden="true" />
-        </Button>
+        <header className="absolute top-0 flex h-12 w-full shrink-0 items-center justify-between gap-3 border-b border-border bg-background px-4">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <ShieldCheck
+              className="size-5 shrink-0 text-primary"
+              aria-hidden="true"
+            />
+
+            <div className="min-w-0">
+              <h2
+                id={headingId}
+                ref={headingRef}
+                tabIndex={-1}
+                className="truncate text-sm font-semibold outline-none"
+              >
+                Review Guardian AI
+              </h2>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Tooltip>
+              <TooltipTrigger
+                render={
+                  <a
+                    href={COPILOT_CHAT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={buttonVariants({
+                      variant: "ghost",
+                      size: "icon-sm",
+                    })}
+                    aria-label="새 탭에서 열기"
+                  >
+                    <ExternalLink className="size-4" aria-hidden="true" />
+                  </a>
+                }
+              />
+
+              <TooltipContent side="bottom">새 탭에서 열기</TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger
+                render={
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon-sm"
+                    onClick={onClose}
+                    aria-label="채팅창 닫기"
+                  >
+                    <X className="size-4" aria-hidden="true" />
+                  </Button>
+                }
+              />
+
+              <TooltipContent side="bottom">채팅창 닫기</TooltipContent>
+            </Tooltip>
+          </div>
+        </header>
 
         <iframe
           ref={iframeRef}

@@ -4,18 +4,21 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
 import { CopilotChatProvider } from "@/components/copilot/copilot-chat-widget"
 import { AppHeader } from "@/components/sections/app-header"
 import { AppFooter } from "@/components/sections/app-footer"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 function RootLayout() {
   return (
-    <CopilotChatProvider>
-      <main className="min-h-dvh">
-        <AppHeader />
-        <Outlet />
-        <AppFooter />
-      </main>
+    <TooltipProvider>
+      <CopilotChatProvider>
+        <main className="min-h-dvh">
+          <AppHeader />
+          <Outlet />
+          <AppFooter />
+        </main>
+      </CopilotChatProvider>
 
       <TanStackRouterDevtools />
-    </CopilotChatProvider>
+    </TooltipProvider>
   )
 }
 
