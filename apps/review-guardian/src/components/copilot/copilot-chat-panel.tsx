@@ -1,6 +1,6 @@
 import type { RefObject } from "react"
 import { motion, useReducedMotion } from "motion/react"
-import { ExternalLink, Loader2, ShieldCheck, X } from "lucide-react"
+import { Loader2, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -16,7 +16,7 @@ interface CopilotChatPanelProps {
   onClose: () => void
   onIframeLoad: () => void
   iframeRef: RefObject<HTMLIFrameElement | null>
-  headingRef: RefObject<HTMLHeadingElement | null>
+  // headingRef: RefObject<HTMLHeadingElement | null>
 }
 
 export function CopilotChatPanel({
@@ -28,8 +28,8 @@ export function CopilotChatPanel({
   onClose,
   onIframeLoad,
   iframeRef,
-  headingRef,
-}: CopilotChatPanelProps) {
+  // headingRef,
+}: Readonly<CopilotChatPanelProps>) {
   const prefersReducedMotion = useReducedMotion()
 
   return (
